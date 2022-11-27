@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Категория: {{category}}{% endblock %}
+
+{% block content %}
+<h1>Категория: {{category}}</h1>
+{% include 'partials/items.html' %}
+
+{% if is_paginated %}
+  {% include 'inc/_pag.html' %}
+{% endif %}
+{% endblock %}

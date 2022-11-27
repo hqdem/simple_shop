@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{item.name}}{% endblock %}
+
+{% block content %}
+
+<h1>Товар: {{item.name}}</h1>
+<div class="row">
+    <div class="col-4">
+        <div class="card text-bg-secondary">
+            {% if item.image %}
+            <img src="{{item.image.url}}" class="card-img-top" width="400" height="300" alt="...">
+            {% else %}
+            <img src="{% static 'img/no_photo.jpg' %}" class="card-img-top" width="400" height="300" alt="...">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{item.name}}</h5>
+                <h6 class="card-text">{{item.category.name}}</h6>
+                <p class="card-text">{{item.caption}}</p>
+                <h6 class="card-text">{{item.price}}</h6>
+                <form action="{% url 'cart_add' item.slug %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-info">В корзину</button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="other-items mt-5 mb-5">
+        <h1>Возможно, вас заинтересует: </h1>
+        {% include 'partials/items.html' %}
+        {% if is_paginated %}
+            {% include 'inc/_pag.html' %}
+        {% endif %}
+    </div>
+
+{% endblock %}

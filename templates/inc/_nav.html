@@ -1,0 +1,38 @@
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">Магазин</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Главная</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Категории
+          </a>
+          <ul class="dropdown-menu">
+            {% for category in categories %}
+              <li><a class="dropdown-item" href="{{category.get_absolute_url}}">{{category.name}}</a></li>
+            {% endfor %}
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'home' %}">Все категории</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <li><a href="{% url 'cart_detail' %}" class="btn btn-outline-light">Корзина<span class="badge text-bg-secondary">{{cart_count_items}}</span></a></li>
+        </li>
+      </ul>
+      <form class="d-flex" method="get" action="{% url 'search_results' %}">
+        {% if request.GET.q %}
+          <input class="form-control me-2" name="q" type="search" placeholder="Поиск" value="{{request.GET.q}}" aria-label="Search">
+        {% else %}
+          <input class="form-control me-2" name="q" type="search" placeholder="Поиск" aria-label="Search">
+        {% endif %}
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

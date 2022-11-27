@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Результаты поиска{% endblock %}
+
+{% block content %}
+
+{% include 'partials/items.html' %}
+
+{% if is_paginated %}
+   {% include 'inc/_pag.html' %}
+{% endif %}
+{% endblock %}

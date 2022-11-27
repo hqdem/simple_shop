@@ -1,0 +1,21 @@
+{% load static %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for item in items %}
+    <div class="col">
+        <div class="card text-bg-secondary">
+            {% if item.image %}
+            <img src="{{item.image.url}}" class="card-img-top" width="400" height="300" alt="...">
+            {% else %}
+            <img src="{% static 'img/no_photo.jpg' %}" class="card-img-top" width="400" height="300" alt="...">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{item.name}}</h5>
+                <h6 class="card-text">{{item.category.name}}</h6>
+                <p class="card-text">{{item.caption|truncatewords:50}}</p>
+                <h6 class="card-text">{{item.price}}</h6>
+                <a href="{{item.get_absolute_url}}" class="btn btn-info">К товару</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
