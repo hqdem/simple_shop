@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     # 3-rd party
     'debug_toolbar',
+    'allauth',
+    'allauth.account',
 
     # Local
     'shop.apps.ShopConfig',
@@ -141,7 +143,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # AUTH
 AUTH_USER_MODEL = 'shop.User'
+SITE_ID = 1
+LOGIN_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT = 'home'
+ACCOUNT_FORMS = {
+    'login': 'auth.forms.CustomLoginForm',
+    'signup': 'auth.forms.CustomSignupForm',
+    'add_email': 'allauth.account.forms.AddEmailForm',
+    'change_password': 'allauth.account.forms.ChangePasswordForm',
+    'set_password': 'allauth.account.forms.SetPasswordForm',
+    'reset_password': 'allauth.account.forms.ResetPasswordForm',
+    'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
+    'disconnect': 'allauth.socialaccount.forms.DisconnectForm',
+}
+ACCOUNT_SESSION_REMEMBER = True
 
+# EMAIL
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # DEBUG_TOOLBAR
 INTERNAL_IPS = [

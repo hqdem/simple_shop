@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<p>Еще нет аккаунта? <a href="{% url 'account_signup' %}">Регистрация</a></p>
+<form action="{% url 'account_login'%}" method="post">
+{% csrf_token %}
+{{form.as_p}}
+<button class="btn btn-primary" type="submit">Войти</button>
+</form>
+{% endblock %}

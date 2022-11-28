@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 from django.core.cache import cache
@@ -13,6 +14,7 @@ Configuration.account_id = 962210
 Configuration.secret_key = 'test_be528ZeXOpKdYjviCWQxYTD6WhdY0J665UWc9CCuSuc'
 
 
+@login_required
 def cart_detail(request):
     cart = Cart(request)
     context = {
@@ -21,6 +23,7 @@ def cart_detail(request):
     return render(request, 'cart/cart_detail.html', context=context)
 
 
+@login_required
 @require_POST
 def cart_add(request, product_slug):
     cart = Cart(request)
@@ -29,6 +32,7 @@ def cart_add(request, product_slug):
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
+@login_required
 @require_POST
 def cart_remove(request, product_slug):
     cart = Cart(request)
@@ -37,6 +41,7 @@ def cart_remove(request, product_slug):
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
+@login_required
 @require_POST
 def cart_inc(request, product_slug):
     cart = Cart(request)
@@ -45,6 +50,7 @@ def cart_inc(request, product_slug):
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
+@login_required
 @require_POST
 def cart_dec(request, product_slug):
     cart = Cart(request)
@@ -53,6 +59,7 @@ def cart_dec(request, product_slug):
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
+@login_required
 @require_POST
 def purchase(request):
     cart = Cart(request)
@@ -74,6 +81,7 @@ def purchase(request):
     return redirect(payment.confirmation.confirmation_url)
 
 
+@login_required
 def payment_redirect(request):
     payment_id = cache.get(f'{request.session.session_key}_payment_id', None)
     cache.delete(f'{request.session.session_key}_payment_id')
@@ -94,9 +102,11 @@ def payment_redirect(request):
     return redirect('home')
 
 
+@login_required
 def after_success(request):
     return render(request, 'cart/success.html')
 
 
+@login_required
 def after_fail(request):
     return render(request, 'cart/fail.html')

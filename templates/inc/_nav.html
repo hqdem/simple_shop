@@ -23,7 +23,15 @@
         </li>
         <li class="nav-item">
           <li><a href="{% url 'cart_detail' %}" class="btn btn-outline-light">Корзина<span class="badge text-bg-secondary">{{cart_count_items}}</span></a></li>
-        </li>
+        <li class="nav-item">
+          {% if user.is_authenticated %}
+            <li class="nav-link" style="color:white;">Здравствуйте, {{user.username}}</li>
+            <li><a href="{% url 'account_logout' %}" class="btn btn-outline-danger">Выйти</a></li>
+          {% else %}
+            <li class="ms-4 me-2"><a href="{% url 'account_login' %}" class="btn btn-outline-danger">Вход</a></li>
+            <li><a href="{% url 'account_signup' %}" class="btn btn-outline-danger">Регистриция</a></li>
+
+          {% endif %}
       </ul>
       <form class="d-flex" method="get" action="{% url 'search_results' %}">
         {% if request.GET.q %}

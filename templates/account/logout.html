@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Выход{% endblock %}
+
+{% block content %}
+<h1>{{ user.username }}, вы действительно желаете выйти?</h1>
+<form action="{% url 'account_logout' %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-outline-primary">Выйти</button>
+    {% if request.META.HTTP_REFERER %}
+    <a href="{{request.META.HTTP_REFERER}}" class="btn btn-outline-danger">Назад</a>
+    {% else %}
+    <a href="{% url 'home' %}" class="btn btn-outline-danger">Назад</a>
+    {% endif %}
+</form>
+{% endblock %}
