@@ -43,12 +43,15 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
     'django_filters',
 
     # Local
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'shop_api.apps.ShopApiConfig',
+    'cart_api.apps.CartApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -171,3 +174,10 @@ INTERNAL_IPS = [
 
 # CART
 CART_SESSION_ID = 'shopping_cart'
+
+# REST_FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
