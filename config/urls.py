@@ -8,6 +8,8 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('accounts/', include('allauth.urls')),
     path('cart/', include('cart.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/v1/', include('shop_api.urls')),
     path('', include('shop.urls')),
 ] + static(settings.STATIC_URL,
            document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,

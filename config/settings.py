@@ -42,10 +42,13 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'allauth',
     'allauth.account',
+    'rest_framework',
+    'django_filters',
 
     # Local
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
+    'shop_api.apps.ShopApiConfig',
 ]
 
 MIDDLEWARE = [
