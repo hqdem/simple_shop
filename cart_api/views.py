@@ -22,7 +22,7 @@ class CartDetailAPIView(APIView):
 
     def get(self, request):
         cart = Cart(request)
-        res = CartSerializer(cart, many=True).data
+        res = CartSerializer(cart, many=True, context={'request': request}).data
         return Response(res)
 
 
